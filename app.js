@@ -1,4 +1,5 @@
-const fs = require('fs');
+const { writeFile, copyFile } = require('./utils/generate-site.js');
+
 const generatePage = require('./src/page-template');
 
 const inquirer = require('inquirer');
@@ -53,6 +54,7 @@ const promptUser = () => {
         }
     ]);
 };
+
 
 const promptProject = portfolioData => {
 
@@ -149,7 +151,7 @@ promptUser()
 
     .then(writeFileResponse => {
         console.log(writeFileResponse);
-        return fs.copyFile();
+        return copyFile();
     })
 
     .then(copyFileResponse => {
@@ -158,26 +160,3 @@ promptUser()
     .catch(err => {
         console.log(err);
     });
-
-
-
-
-
-    // const pageHTML = generatePage(portfolioData);
-
-    // // having the file writen/created in the the dist folder
-    // fs.writeFile('./dist/index.html', pageHTML, err => {
-    //     if (err) {
-    //         console.log(err);
-    //         return;
-    //     }
-    //     console.log('Portfolio Page Created! Check out index.html in this directory to see it!');
-
-    //     fs.copyFile('./src/style.css', './dist/style.css', err => {
-    //         if (err) {
-    //             console.log(err);
-    //             return;
-    //         }
-    //         console.log('Style sheet copied successfully!');
-    //     });
-    // });
